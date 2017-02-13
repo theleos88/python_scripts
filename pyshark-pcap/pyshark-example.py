@@ -42,5 +42,7 @@ for packet in cap:
         print
     i += 1
 
+    print packet.length # Packet length
+
     if i> 10:
         break
