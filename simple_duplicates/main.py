@@ -34,25 +34,48 @@ def load_obj(args):
 def parse_files(ds, args):
     for fn in sys.stdin:
         info = fn.strip().split(" ")
-        print (info[0], info[1], info[2])
+        print (info[0], info[1], info[2], info[3])
 
         # Check name + size
-        name = info[1]+info[2]
+        name = info[1]+"_"+info[2]
 
         # Creating if not existing
         if name not in ds.keys():
             ds[name] = {}
             ds[name]["dup"] = 0
         else:
+
+            # Check if original is redundant
+            if (ds[name]["size"] == info[2] and ds[name]["parent"] == info[0] and ds[name]["datafingerprint"] == info[3]):
+                # Already parsed
+                print("Data already there")
+                continue
+
+            dups = False
+            # Check if duplicates are redundant!
+            if (ds[name]["dup"] != 0):
+                for i in range(1, ds[name]["dup"] + 1):
+                    if (ds[name+"_"+str(i)]["size"] == info[2] and ds[name+"_"+str(i)]["parent"] == info[0] and ds[name+"_"+str(i)]["datafingerprint"] == info[3]):
+                        dups = True
+
+            if (dups):
+                print ("Data already there, but within duplicates")
+                continue
+
+            # Now it's for sure a duplicate
             ds[name]["dup"] += 1
 
             # Since it is a dup, we should add a new name
             name = name+"_"+str(ds[name]["dup"])
             ds[name] = {}
+            ds[name]["dup"] = -1
 
+        # DATABASE HERE!
         ds[name]["type"] = "f"
         ds[name]["size"] = info[2]
         ds[name]["parent"] = info[0]
+        ds[name]["datafingerprint"] = info[3]
+
     save_obj(ds, args)
 
 
