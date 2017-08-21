@@ -7,7 +7,7 @@ import csv
 
 def export_csv(ds, filename):
 
-    writer = csv.writer(open(filename, 'wb'), delimiter=";", quoting=csv.QUOTE_NONNUMERIC)
+    writer = csv.writer(open(filename, 'wb'), delimiter="|", quoting=csv.QUOTE_NONNUMERIC)
 
     for key, value in ds.iteritems():
         ln = [key]

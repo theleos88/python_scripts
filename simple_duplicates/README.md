@@ -25,12 +25,10 @@ one/file1 | three/file2 = Same data, Different name
 Of course, this also imply a case with different data and different name.
 
 
-``` 
-	find DIR -type f -printf "%h %f %s\n" | python main.py -t d [--dest DESTDIR]
-```
+# Usage
 
-or
+Check the ```Makefile```
 
-```
-	find /usr/local/src/fdupes/testdir/ -type d | parallel --no-notice du -s
-```
+# Conventions
+
+Using ```|``` as delimiter for both objects and csv files.
