@@ -7,7 +7,7 @@ import csv
 
 def export_csv(ds, filename):
 
-    writer = csv.writer(open(filename, 'wb'), delimiter=";")
+    writer = csv.writer(open(filename, 'wb'), delimiter=";", quoting=csv.QUOTE_NONNUMERIC)
 
     for key, value in ds.iteritems():
         ln = [key]
@@ -33,8 +33,12 @@ def load_obj(args):
 
 def parse_files(ds, args):
     for fn in sys.stdin:
-        info = fn.strip().split(" ")
-        print (info[0], info[1], info[2], info[3])
+        info = fn.strip().split("|")
+        
+        # print (info[0].strip(), info[1].strip(), info[2].strip(), info[3].strip())
+        # Stripping data
+        for i in range(0,4):
+        	info[i] = info[i].strip()
 
         # Check name + size
         name = info[1]+"_"+info[2]
@@ -73,9 +77,10 @@ def parse_files(ds, args):
         # DATABASE HERE!
         ds[name]["fullname"] = info[1]
         ds[name]["type"] = "f"
-        ds[name]["size"] = info[2]
+        ds[name]["size"] = int(info[2])
         ds[name]["parent"] = info[0]
         ds[name]["datafingerprint"] = info[3]
+        print (info[1])
 
     save_obj(ds, args)
 
