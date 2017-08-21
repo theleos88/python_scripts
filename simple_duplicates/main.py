@@ -7,7 +7,7 @@ import csv
 
 def export_csv(ds, filename):
 
-    writer = csv.writer(open(filename, 'wb'))
+    writer = csv.writer(open(filename, 'wb'), delimiter=";")
 
     for key, value in ds.iteritems():
         ln = [key]
@@ -71,6 +71,7 @@ def parse_files(ds, args):
             ds[name]["dup"] = -1
 
         # DATABASE HERE!
+        ds[name]["fullname"] = info[1]
         ds[name]["type"] = "f"
         ds[name]["size"] = info[2]
         ds[name]["parent"] = info[0]

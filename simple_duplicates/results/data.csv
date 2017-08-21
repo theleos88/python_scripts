@@ -1,4 +1,0 @@
-file1_15,dup,2,datafingerprint,31303632323133353336,type,f,parent,test_dir/one,size,15
-file2_15,dup,0,datafingerprint,31303632323133353336,type,f,parent,test_dir/three,size,15
-file1_15_1,dup,-1,datafingerprint,31303632323133353336,type,f,parent,test_dir/two,size,15
-file1_15_2,dup,-1,datafingerprint,38303737323838373731,type,f,parent,test_dir/three,size,15
