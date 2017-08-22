@@ -1,0 +1,5 @@
+test_dir/one ||| file1 ||| 15 ||| 31303632323133353336
+test_dir/folder with spaces ||| Readme with spaces and points.md ||| 355 ||| 232074656d706c617465
+test_dir/two ||| file1 ||| 15 ||| 31303632323133353336
+test_dir/three ||| file2 ||| 15 ||| 31303632323133353336
+test_dir/three ||| file1 ||| 15 ||| 38303737323838373731

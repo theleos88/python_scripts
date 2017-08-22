@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import print_function
 import sys
 import pickle
 import argparse
@@ -7,7 +10,7 @@ import csv
 
 def export_csv(ds, filename):
 
-    writer = csv.writer(open(filename, 'wb'), delimiter='þ', quoting=csv.QUOTE_NONNUMERIC)
+    writer = csv.writer(open(filename, 'wb'), delimiter="^", quoting=csv.QUOTE_NONNUMERIC)
 
     for key, value in ds.iteritems():
         ln = [key]
@@ -31,14 +34,24 @@ def load_obj(args):
     return ds
 
 
+# Def to print to stderr
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
+
+
 def parse_files(ds, args):
     for fn in sys.stdin:
-        info = fn.strip().split("|")
-        
+        info = fn.strip().split("þ")
+
         # print (info[0].strip(), info[1].strip(), info[2].strip(), info[3].strip())
-        # Stripping data
-        for i in range(0,4):
-        	info[i] = info[i].strip()
+        # Try Stripping data
+
+        try:
+            for i in range(0, 4):
+                info[i] = info[i].strip()
+        except:
+            eprint("Skip line; Error parsing: " + fn)
+            continue
 
         # Check name + size
         name = info[1]+"_"+info[2]
